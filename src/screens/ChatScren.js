@@ -15,28 +15,9 @@ const ChatScreen = ({ route }) => {
     const navigation = useNavigation();
 
 
-    const sendMessage = async (chat) => {
-        const newMessage = { text: message, sender: 'Me' };
-        const updatedChat = { ...chat, messages: [...chat.messages, newMessage] };
-        const updatedChats = chats.map(c => (c.name === chat.name ? updatedChat : c));
-        setChats(updatedChats);
-
-        if (chat.name === selectedChat?.name) {
-            setSelectedChat(updatedChat);
-        }
-
-        const replyMessage = { text: message + ' ❤️', sender: chat.name };
-        setTimeout(() => {
-            const updatedChat = { ...chat, messages: [...chat.messages, replyMessage] };
-            const updatedChats = chats.map(c => (c.name === chat.name ? updatedChat : c));
-            setChats(updatedChats);
-
-            if (chat.name === selectedChat?.name) {
-                setSelectedChat(updatedChat);
-            }
-        }, 1000);
-
-        setMessage('');
+    const sendMessage = async (message) => {
+       chatContext.sendMessage(message);
+       setMessage('')
     };
     const handleGoBack = () => {
         navigation.goBack();

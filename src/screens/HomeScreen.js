@@ -34,6 +34,7 @@ const HomeScreen = ({ navigation }) => {
     ]);
 
     const selectChat = (chat) => {
+        chatContext.selectChat(chat)
         navigation.navigate('Chat', { chat });
     };
 
