@@ -44,6 +44,7 @@ const ChatScreen = ({ route }) => {
 
     return (
         <SafeAreaView style={{ flex: 1, padding: 20 }}>
+         <View style = {{flex:1, marginHorizontal:10}}>
             <TouchableOpacity style={styles.backButtonContainer} onPress={handleGoBack}>
                 {/* <Icon name="power-off" size={20} style={styles.backButtonIcon} /> */}
                 <Text style={styles.backButtonText}>Back</Text>
@@ -67,6 +68,7 @@ const ChatScreen = ({ route }) => {
                 onChangeText={text => setMessage(text)}
             />
             <Button title="Send" onPress={sendMessage} />
+            </View>
         </SafeAreaView>
     );
 };
