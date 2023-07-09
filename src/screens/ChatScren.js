@@ -45,7 +45,7 @@ const ChatScreen = ({ route }) => {
     return (
         <SafeAreaView style={{ flex: 1, padding: 20 }}>
             <TouchableOpacity style={styles.backButtonContainer} onPress={handleGoBack}>
-                <Icon name="angle-left" size={20} style={styles.backButtonIcon} />
+                {/* <Icon name="power-off" size={20} style={styles.backButtonIcon} /> */}
                 <Text style={styles.backButtonText}>Back</Text>
             </TouchableOpacity>
 
