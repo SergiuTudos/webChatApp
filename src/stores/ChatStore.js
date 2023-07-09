@@ -6,14 +6,14 @@ const SEND_MESSAGE = 'SEND_MESSAGE';
 const SELECT_CHAT = 'SELECT_CHAT';
 
 const initialState = {
-  users: [
-    { name: 'Alex' },
-    { name: 'Nikki' },
-    { name: 'John' }
-  ],
+    conversations : [
+        {name: 'Alex', messages: [] },
+        { name: 'Nikki', messages: [] },
+        { name: 'John', messages: [] }
+    ],
   groupChats: [
-    { name: 'Group Chat 1', participants: ['Alex', 'Nikki', 'John'], messages: [] },
-    { name: 'Group Chat 2', participants: ['Nikki', 'John'], messages: [] }
+    { name: 'Friends', participants: ['Alex', 'Nikki', 'John'], messages: [] },
+    { name: 'ClassMates', participants: ['Nikki', 'John'], messages: [] }
   ],
   activeChat:null
 };
@@ -54,7 +54,13 @@ const ChatStore = ({ children }) => {
   };
 
   const sendMessage = (chatName, message) => {
-    dispatch({ type: SEND_MESSAGE, payload: { chatName, message } });
+    const item = state.conversations.find(item => item.name === chatName);
+        if (item) {
+          item.messages.unshift(message);
+        }
+      
+      
+    dispatch({ type: SEND_MESSAGE, payload: { chatName, messages:item } });
   };
   const selectChat = (chat)=>{
     dispatch({ type: SELECT_CHAT, payload: { chat } });

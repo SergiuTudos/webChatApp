@@ -10,9 +10,8 @@ const HomeScreen = ({ navigation }) => {
     const chatContext = useContext(ChatContext);
     const [chats, setChats] = useState([]);
     const [chatName, setChatName] = useState('');
-    const [message, setMessage] = useState('');
-    const [selectedChat, setSelectedChat] = useState(null);
 
+    const {conversations,groupChats} = chatContext.state;
     const createChat = () => {
         const chatExists = chats.some(chat => chat.name === chatName);
         if (!chatExists) {
@@ -21,18 +20,6 @@ const HomeScreen = ({ navigation }) => {
         }
         setChatName('');
     };
-
-    const [users, setUsers] = useState([
-        { name: 'Alex' },
-        { name: 'Nikki' },
-        { name: 'John' }
-    ]);
-
-    const [groupChats, setGroupChats] = useState([
-        { name: 'Friends', participants: ['Alex', 'Nikki', 'John'], messages: [] },
-        { name: 'ClassMates', participants: ['Nikki', 'John'], messages: [] }
-    ]);
-
     const selectChat = (chat) => {
         chatContext.selectChat(chat)
         navigation.navigate('Chat', { chat });
@@ -50,7 +37,7 @@ const HomeScreen = ({ navigation }) => {
             <View >
                 <Text style={{ fontSize: 24, fontWeight: 'bold', marginBottom: 20 }}>Web Chat</Text>
                 <FlatList
-                    data={[...users, ...groupChats]}
+                    data={[...conversations, ...groupChats]}
                     keyExtractor={(item) => item.name}
                     renderItem={({ item }) => (
                         <Button title={item.name} onPress={() => selectChat(item)} />

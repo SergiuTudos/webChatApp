@@ -8,15 +8,13 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 const ChatScreen = ({ route }) => {
     const { chat } = route.params;
     const chatContext = useContext(ChatContext);
+    const {activeChat} = chatContext.state;
     const [message, setMessage] = useState('');
-    const [selectedChat, setSelectedChat] = useState(chat);
-    const [chats, setChats] = useState([]);
-    const [chatName, setChatName] = useState('');
     const navigation = useNavigation();
 
 
-    const sendMessage = async (message) => {
-       chatContext.sendMessage(message);
+    const sendMessage = async () => {
+       chatContext.sendMessage(activeChat.name, message);
        setMessage('')
     };
     const handleGoBack = () => {
@@ -32,23 +30,24 @@ const ChatScreen = ({ route }) => {
             </TouchableOpacity>
 
 
-            <Text style={styles.header}>Chat: {selectedChat.name}</Text>
+            <Text style={styles.header}>Chat: {}</Text>
             <FlatList
-                data={selectedChat.messages}
+                data={activeChat.messages}
                 keyExtractor={(item, index) => index.toString()}
                 renderItem={({ item }) => (
-                    <Text>{`${item.sender}: ${item.text}`}</Text>
+                    <Text>{`${activeChat.name}: ${item}`}</Text>
                 )}
                 ListEmptyComponent={<Text>Start Your Conversation Here</Text>}
+                inverted
             />
 
             <TextInput
                 style={styles.input}
-                placeholder="Type a message"
+                placeholder=" Type a message"
                 value={message}
                 onChangeText={text => setMessage(text)}
             />
-            <Button title="Send" onPress={sendMessage} />
+            <Button color= 'blue' title="Send" onPress={sendMessage} />
             </View>
         </SafeAreaView>
     );
