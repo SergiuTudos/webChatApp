@@ -1,24 +1,23 @@
-import React, { useReducer } from 'react';
+import React, {useReducer} from 'react';
 import ChatContext from '../context/ChatContext';
 
-const  CREATE_CHAT = 'CREATE_CHAT';
+const CREATE_CHAT = 'CREATE_CHAT';
 const SEND_MESSAGE = 'SEND_MESSAGE';
 const SELECT_CHAT = 'SELECT_CHAT';
 
-
-const REPLY_TEMPLATE = " ❤️"
+const REPLY_TEMPLATE = ' ❤️';
 
 const initialState = {
-    conversations : [
-        {name: 'Alex', messages: [] },
-        { name: 'Nikki', messages: [] },
-        { name: 'John', messages: [] }
-    ],
-  groupChats: [
-    { name: 'Friends', participants: ['Alex', 'Nikki', 'John'], messages: [] },
-    { name: 'ClassMates', participants: ['Nikki', 'John'], messages: [] }
+  conversations: [
+    {name: 'Alex', messages: []},
+    {name: 'Nikki', messages: []},
+    {name: 'John', messages: []},
   ],
-  activeChat:null
+  groupChats: [
+    {name: 'Friends', participants: ['Alex', 'Nikki', 'John'], messages: []},
+    {name: 'ClassMates', participants: ['Nikki', 'John'], messages: []},
+  ],
+  activeChat: null,
 };
 
 const reducer = (state, action) => {
