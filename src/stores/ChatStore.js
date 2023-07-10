@@ -4,7 +4,7 @@ import ChatContext from '../context/ChatContext';
 const  CREATE_CHAT = 'CREATE_CHAT';
 const SEND_MESSAGE = 'SEND_MESSAGE';
 const SELECT_CHAT = 'SELECT_CHAT';
-const SEND_GROUP_MESSAGE = 'SEND_GROUP_MESSAGE'
+
 
 const REPLY_TEMPLATE = " ❤️"
 
@@ -30,15 +30,6 @@ const reducer = (state, action) => {
       };
     case SEND_MESSAGE:
       const { chatName, message } = action.payload;
-      return {
-        ...state,
-        groupChats: state.groupChats.map(chat =>
-          chat.name === chatName
-            ? { ...chat, messages: [...chat.messages, message] }
-            : chat
-        )
-      }
-      case SEND_GROUP_MESSAGE:
       return {
         ...state,
         groupChats: state.groupChats.map(chat =>
