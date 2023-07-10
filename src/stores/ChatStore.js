@@ -5,6 +5,8 @@ const  CREATE_CHAT = 'CREATE_CHAT';
 const SEND_MESSAGE = 'SEND_MESSAGE';
 const SELECT_CHAT = 'SELECT_CHAT';
 
+const REPLY_TEMPLATE = " ❤️"
+
 const initialState = {
     conversations : [
         {name: 'Alex', messages: [] },
@@ -57,6 +59,7 @@ const ChatStore = ({ children }) => {
     const item = state.conversations.find(item => item.name === chatName);
         if (item) {
           item.messages.unshift(message);
+          item.messages.unshift(message + REPLY_TEMPLATE)
         }
       
       

@@ -14,8 +14,10 @@ const ChatScreen = ({ route }) => {
 
 
     const sendMessage = async () => {
-       chatContext.sendMessage(activeChat.name, message);
-       setMessage('')
+        setMessage('')
+        if(message){
+            chatContext.sendMessage(activeChat.name, message);  
+        } 
     };
     const handleGoBack = () => {
         navigation.goBack();
@@ -39,7 +41,7 @@ const ChatScreen = ({ route }) => {
                 data={activeChat.messages}
                 keyExtractor={(item, index) => index.toString()}
                 renderItem={({ item }) => (
-                    <Text>{`${activeChat.name}: ${item}`}</Text>
+                    <Text>{`Me: ${item}`}</Text>
                 )}
                 ListEmptyComponent={<Text>Start Your Conversation Here</Text>}
                 inverted
@@ -50,6 +52,8 @@ const ChatScreen = ({ route }) => {
                 placeholder=" Type a message"
                 value={message}
                 onChangeText={text => setMessage(text)}
+                onSubmitEditing={sendMessage}
+                blurOnSubmit={false}
             />
             <Button color= 'blue' title="Send" onPress={sendMessage} />
             </View>

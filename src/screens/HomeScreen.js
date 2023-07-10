@@ -31,7 +31,6 @@ const HomeScreen = ({ navigation }) => {
     return <View style={styles.separator} />;
   };
 
-
     return (
         <SafeAreaView style={{ flex: 1, padding: 20 }}>
             <View >
