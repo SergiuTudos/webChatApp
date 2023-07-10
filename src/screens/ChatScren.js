@@ -30,7 +30,11 @@ const ChatScreen = ({ route }) => {
             </TouchableOpacity>
 
 
-            <Text style={styles.header}>Chat: {}</Text>
+            <Text style={styles.header}>Chat: {activeChat.name}</Text>
+            {activeChat.participants
+            ? <Text>{activeChat.participants.join(',')}</Text>
+            :<View/>
+            }
             <FlatList
                 data={activeChat.messages}
                 keyExtractor={(item, index) => index.toString()}
