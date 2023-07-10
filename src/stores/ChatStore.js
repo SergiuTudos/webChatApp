@@ -34,7 +34,7 @@ const reducer = (state, action) => {
         ...state,
         groupChats: state.groupChats.map(chat =>
           chat.name === chatName
-            ? { ...chat, messages: [...chat.messages, message] }
+            ? { ...chat, messages: [...chat.messages] }
             : chat
         )
       }

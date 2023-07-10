@@ -6,7 +6,6 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 const ChatScreen = ({ route }) => {
-    const { chat } = route.params;
     const chatContext = useContext(ChatContext);
     const {activeChat} = chatContext.state;
     const [message, setMessage] = useState('');
