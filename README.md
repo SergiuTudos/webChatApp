@@ -29,8 +29,8 @@ Once the development server is running, open the application in a web browser to
 
 ### Screenshots
 
-HomeScreen:
-![HomeScreen](./src/assets/Home.png)
+#### HomeScreen:
+<img src="./src/assets/Home.png" alt="HomeScreen" width="400" />
 
-ChatScreen:
-![ChatScreen](./src/assets/Chat.png)
+#### ChatScreen:
+<img src="./src/assets/Chat.png" alt="ChatScreen" width="400" />
