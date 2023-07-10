@@ -22,6 +22,9 @@ const ChatScreen = ({ route }) => {
     const handleGoBack = () => {
         navigation.goBack();
     };
+    const renderSeparator = () => {
+        return <View style={styles.separator} />;
+      };
 
     return (
         <SafeAreaView style={{ flex: 1, padding: 20 }}>
@@ -40,10 +43,21 @@ const ChatScreen = ({ route }) => {
             <FlatList
                 data={activeChat.messages}
                 keyExtractor={(item, index) => index.toString()}
-                renderItem={({ item }) => (
-                    <Text>{`Me: ${item}`}</Text>
-                )}
+                renderItem={({ item }) => {
+                     return item.startsWith('Me:')?
+                    (
+                        <View>
+                            <Text style ={styles.messageText}>{`${item}`}</Text>
+                        </View>
+                    )
+                    :   (
+                        <View style ={styles.incomingMessage}>
+                            <Text style ={styles.messageText}>{`${item}`}</Text>
+                        </View>) 
+                    }
+                    }
                 ListEmptyComponent={<Text>Start Your Conversation Here</Text>}
+                ItemSeparatorComponent={renderSeparator}
                 inverted
             />
 
@@ -77,6 +91,19 @@ const styles = StyleSheet.create({
         fontSize: 18,
         color: 'blue',
       },
+      incomingMessage:{
+        display:'flex',
+        alignItems:"flex-end"
+    },
+    separator: {
+        height: 1,
+        backgroundColor: 'lightgray',
+        marginVertical: 4,
+      },
+    messageText:{
+        fontSize: 16,
+        color: 'blue',
+    }
 });
 
 export default ChatScreen;

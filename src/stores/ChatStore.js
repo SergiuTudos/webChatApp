@@ -4,6 +4,7 @@ import ChatContext from '../context/ChatContext';
 const  CREATE_CHAT = 'CREATE_CHAT';
 const SEND_MESSAGE = 'SEND_MESSAGE';
 const SELECT_CHAT = 'SELECT_CHAT';
+const SEND_GROUP_MESSAGE = 'SEND_GROUP_MESSAGE'
 
 const REPLY_TEMPLATE = " ❤️"
 
@@ -36,7 +37,16 @@ const reducer = (state, action) => {
             ? { ...chat, messages: [...chat.messages, message] }
             : chat
         )
-      };
+      }
+      case SEND_GROUP_MESSAGE:
+      return {
+        ...state,
+        groupChats: state.groupChats.map(chat =>
+          chat.name === chatName
+            ? { ...chat, messages: [...chat.messages, message] }
+            : chat
+        )
+      }
     case SELECT_CHAT:
       const { chat} = action.payload;
       return {
@@ -56,14 +66,24 @@ const ChatStore = ({ children }) => {
   };
 
   const sendMessage = (chatName, message) => {
+    const myMessage = "Me:" + message; 
     const item = state.conversations.find(item => item.name === chatName);
         if (item) {
-          item.messages.unshift(message);
-          item.messages.unshift(message + REPLY_TEMPLATE)
+          item.messages.unshift(myMessage);
+          item.messages.unshift(chatName+ " : "+message + REPLY_TEMPLATE)
+          dispatch({ type: SEND_MESSAGE, payload: { chatName, messages:item } });
+          return;
         }
-      
-      
-    dispatch({ type: SEND_MESSAGE, payload: { chatName, messages:item } });
+    const chat = state.groupChats.find(item => item.name === chatName);
+        if (chat) {
+            chat.messages.unshift(myMessage);
+            chat.participants.map(p=>{
+                chat.messages.unshift(p+ " : "  + message + REPLY_TEMPLATE)
+            })
+           
+            dispatch({ type: SEND_MESSAGE, payload: { chatName, messages:chat} });
+        }
+    
   };
   const selectChat = (chat)=>{
     dispatch({ type: SELECT_CHAT, payload: { chat } });
